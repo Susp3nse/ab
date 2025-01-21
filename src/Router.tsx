@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom";
 import Layout from "./components/Layout.js";
 import { Navigate } from "react-router-dom";
 import { lazy } from "react";
@@ -25,11 +25,11 @@ export const routes = [
 ];
 
 const parentRoute = {
-  path: "/ab",
+  path: "/",
   element: <Layout />,
   children: routes,
 };
-const router = createBrowserRouter([parentRoute]);
+const router = createHashRouter([parentRoute]);
 
 export function Router() {
   return <RouterProvider router={router} />;
