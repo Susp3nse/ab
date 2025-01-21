@@ -1,26 +1,30 @@
-import styled from '@emotion/styled';
-import { NavLink } from 'react-router-dom';
-import { Group } from '@mantine/core';
-import { routes } from '@/Router';
-import { Typography } from '@/utils/Typography';
-import classes from './SideBar.module.css';
+import styled from "@emotion/styled";
+import { NavLink } from "react-router-dom";
+import { Group } from "@mantine/core";
+import { Typography } from "@/utils/Typography";
+import classes from "./SideBar.module.css";
+import routes from "@/routes";
 
 export default function NavSideBar() {
   const links = routes.map((item) => (
-    <NavLink
-      className={({ isActive }) => (isActive ? classes.link : classes.link)}
-      to={item.path}
-      key={item.label}
-    >
-      <span>{item.label}</span>
-    </NavLink>
+    <>
+      {item.path && (
+        <NavLink
+          className={({ isActive }) => (isActive ? classes.link : classes.link)}
+          to={item.path}
+          key={item.label}
+        >
+          <span>{item.label}</span>
+        </NavLink>
+      )}
+    </>
   ));
 
   return (
     <nav className={classes.navbar}>
       <div className={classes.navbarMain}>
         <Group className={classes.header} justify="space-between">
-          <SidebarHeader style={{ marginBottom: '24px', marginTop: '16px' }} />
+          <SidebarHeader style={{ marginBottom: "24px", marginTop: "16px" }} />
         </Group>
         {links}
       </div>
@@ -65,7 +69,7 @@ const StyledLogo = styled.div`
 export const SidebarHeader: React.FC<SidebarHeaderProps> = ({ ...rest }) => {
   return (
     <StyledSidebarHeader {...rest}>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div style={{ display: "flex", alignItems: "center" }}>
         <StyledLogo>AB</StyledLogo>
         <Typography variant="subtitle1" fontWeight={700} color="#14a651">
           Account Builder
