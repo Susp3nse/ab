@@ -1,10 +1,22 @@
 import styled from "@emotion/styled";
 import { NavLink } from "react-router-dom";
 import { Group } from "@mantine/core";
-import { Typography } from "@/utils/Typography";
+import { Typography } from "@/utils/Typography.js";
 import classes from "./SideBar.module.css";
-import routes from "@/routes";
-
+const routes = [
+  {
+    path: "home",
+    label: "Home",
+  },
+  {
+    path: "wiki-lookup",
+    label: "Account Lookup",
+  },
+  {
+    path: "quest-builder",
+    label: "Quest Builder",
+  },
+];
 export default function NavSideBar() {
   const links = routes.map((item) => (
     <>

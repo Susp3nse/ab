@@ -1,6 +1,5 @@
 import { Outlet } from "react-router-dom";
-import AppSidebar from "./Sidebar/SideBar";
-import { Suspense } from "react";
+import AppSidebar from "./Sidebar/SideBar.js";
 
 export default function Layout() {
   return (

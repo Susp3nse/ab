@@ -1,4 +1,4 @@
-import { AchievementDiaries } from "../interfaces/WikiUserData";
+import { AchievementDiaries } from "../interfaces/WikiUserData.js";
 
 enum OSRSSkills {
   Attack = "attack",

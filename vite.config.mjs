@@ -4,7 +4,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
   plugins: [react(), tsconfigPaths()],
-  base: "/AB-list-maker",
+  base: "/ab",
   test: {
     globals: true,
     environment: "jsdom",

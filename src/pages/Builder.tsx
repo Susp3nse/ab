@@ -10,7 +10,7 @@ import {
   Title,
   Tooltip,
 } from "@mantine/core";
-import allOSRSQuests, { skillOptions } from "@/utils/quests";
+import allOSRSQuests, { skillOptions } from "@/utils/quests.js";
 
 const QuestBuilderPage = () => {
   // State to keep track of selected builder names

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { IconChevronDown, IconChevronUp } from '@tabler/icons-react';
+import { useState } from "react";
+import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
 import {
   ActionIcon,
   Button,
@@ -13,15 +13,15 @@ import {
   Text,
   TextInput,
   Title,
-} from '@mantine/core';
-import { useUserData } from '@/utils/querys';
+} from "@mantine/core";
+import { useUserData } from "@/utils/querys.js";
 
 const AccountLookup = () => {
-  const [userName, setUserName] = useState<string>('');
+  const [userName, setUserName] = useState<string>("");
   const [fetchUser, setFetchUser] = useState<boolean>(false);
 
   const handleSearch = () => {
-    if (userName.trim() === '') {
+    if (userName.trim() === "") {
       return;
     } // Prevent search if no username entered
     if (userName) {
@@ -36,9 +36,9 @@ const AccountLookup = () => {
 
   return (
     <div>
-      <Center style={{ minHeight: '100vh', flexDirection: 'column' }}>
+      <Center style={{ minHeight: "100vh", flexDirection: "column" }}>
         <Title order={1}>OSRS Account Lookup</Title>
-        <Text size="lg" c="dimmed" style={{ marginBottom: '20px' }}>
+        <Text size="lg" c="dimmed" style={{ marginBottom: "20px" }}>
           Enter your account name to see your achievements, quests, and stats.
         </Text>
 
@@ -48,10 +48,10 @@ const AccountLookup = () => {
           onChange={(event) => handleOnChangeInput(event.target.value)}
           placeholder="Enter OSRS username"
           label="Account Name"
-          style={{ width: '100%', maxWidth: 400, marginBottom: '20px' }}
+          style={{ width: "100%", maxWidth: 400, marginBottom: "20px" }}
         />
 
-        <Button onClick={handleSearch} style={{ marginBottom: '20px' }}>
+        <Button onClick={handleSearch} style={{ marginBottom: "20px" }}>
           Search
         </Button>
         {fetchUser && <AccountInfo userName={userName} />}
@@ -67,13 +67,13 @@ const AccountInfo = ({ userName }: { userName: string }) => {
   const mapQuestProgress = (status: number) => {
     switch (status) {
       case 0:
-        return { text: 'Not Started', color: 'red' };
+        return { text: "Not Started", color: "red" };
       case 1:
-        return { text: 'In Progress', color: 'yellow' };
+        return { text: "In Progress", color: "yellow" };
       case 2:
-        return { text: 'Completed', color: 'green' };
+        return { text: "Completed", color: "green" };
       default:
-        return { text: 'Unknown', color: 'gray' };
+        return { text: "Unknown", color: "gray" };
     }
   };
   return (
@@ -84,18 +84,21 @@ const AccountInfo = ({ userName }: { userName: string }) => {
 
       {/* Displaying User Data */}
       {data && (
-        <Grid style={{ width: '100%', maxWidth: '95%' }} gutter="md">
+        <Grid style={{ width: "100%", maxWidth: "95%" }} gutter="md">
           {/* Card for Username and Skills */}
           <Grid.Col span={6}>
             <Card shadow="sm" padding="lg" radius="md" withBorder>
               <Title order={3}>{data.username}</Title>
-              <Text size="sm" color="dimmed">{`Last updated: ${data.timestamp}`}</Text>
+              <Text
+                size="sm"
+                color="dimmed"
+              >{`Last updated: ${data.timestamp}`}</Text>
 
               {/* Skills Section (Non-Collapsible) */}
-              <Title order={4} style={{ marginTop: '20px' }}>
+              <Title order={4} style={{ marginTop: "20px" }}>
                 Skills
               </Title>
-              <Grid style={{ marginTop: '10px' }}>
+              <Grid style={{ marginTop: "10px" }}>
                 {Object.entries(data.levels).map(([skillName, level]) => (
                   <Grid.Col span={12} key={skillName}>
                     <Group>
@@ -106,7 +109,7 @@ const AccountInfo = ({ userName }: { userName: string }) => {
                         value={(level / 99) * 100} // Assuming max level is 99 for skills
                         size="xs"
                         color="blue"
-                        style={{ width: '80%' }}
+                        style={{ width: "80%" }}
                       />
                     </Group>
                   </Grid.Col>
@@ -122,29 +125,37 @@ const AccountInfo = ({ userName }: { userName: string }) => {
               {/* Card for Quests */}
               <Grid.Col span={12}>
                 <Card shadow="sm" padding="lg" radius="md" withBorder>
-                  <Group style={{ marginTop: '20px' }}>
+                  <Group style={{ marginTop: "20px" }}>
                     <Title order={4}>Quests</Title>
-                    <ActionIcon onClick={() => setQuestsOpened((prev) => !prev)}>
-                      {questsOpened ? <IconChevronUp size={16} /> : <IconChevronDown size={16} />}
+                    <ActionIcon
+                      onClick={() => setQuestsOpened((prev) => !prev)}
+                    >
+                      {questsOpened ? (
+                        <IconChevronUp size={16} />
+                      ) : (
+                        <IconChevronDown size={16} />
+                      )}
                     </ActionIcon>
                   </Group>
 
                   <Collapse in={questsOpened}>
-                    <Grid style={{ marginTop: '10px' }}>
+                    <Grid style={{ marginTop: "10px" }}>
                       <Grid.Col span={12}>
                         <ul>
-                          {Object.entries(data.quests).map(([quest, status]) => {
-                            const { text, color } = mapQuestProgress(status);
-                            return (
-                              <li key={quest}>
-                                <Group>
-                                  <Text color={color}>
-                                    {quest}: {text}
-                                  </Text>
-                                </Group>
-                              </li>
-                            );
-                          })}
+                          {Object.entries(data.quests).map(
+                            ([quest, status]) => {
+                              const { text, color } = mapQuestProgress(status);
+                              return (
+                                <li key={quest}>
+                                  <Group>
+                                    <Text color={color}>
+                                      {quest}: {text}
+                                    </Text>
+                                  </Group>
+                                </li>
+                              );
+                            }
+                          )}
                         </ul>
                       </Grid.Col>
                     </Grid>
@@ -155,44 +166,61 @@ const AccountInfo = ({ userName }: { userName: string }) => {
               {/* Card for Achievement Diaries */}
               <Grid.Col span={12}>
                 <Card shadow="sm" padding="lg" radius="md" withBorder>
-                  <Group style={{ marginTop: '20px' }}>
+                  <Group style={{ marginTop: "20px" }}>
                     <Title order={4}>Achievement Diaries</Title>
-                    <ActionIcon onClick={() => setDiariesOpened((prev) => !prev)}>
-                      {diariesOpened ? <IconChevronUp size={16} /> : <IconChevronDown size={16} />}
+                    <ActionIcon
+                      onClick={() => setDiariesOpened((prev) => !prev)}
+                    >
+                      {diariesOpened ? (
+                        <IconChevronUp size={16} />
+                      ) : (
+                        <IconChevronDown size={16} />
+                      )}
                     </ActionIcon>
                   </Group>
 
                   <Collapse in={diariesOpened}>
-                    <Grid style={{ marginTop: '10px' }}>
+                    <Grid style={{ marginTop: "10px" }}>
                       <Grid.Col span={12}>
-                        {Object.entries(data.achievement_diaries).map(([region, difficulties]) => (
-                          <div key={region}>
-                            <Title order={5}>{region}</Title>
-                            {Object.entries(difficulties).map(
-                              ([difficulty, { complete, tasks }]) => {
-                                const completedTasks = tasks.filter((task) => task === true).length;
-                                const progressPercent = (completedTasks / tasks.length) * 100;
-                                return (
-                                  <Card
-                                    key={difficulty}
-                                    shadow="sm"
-                                    padding="lg"
-                                    radius="md"
-                                    withBorder
-                                    style={{ marginBottom: '10px' }}
-                                  >
-                                    <Title order={6}>{difficulty} Diaries</Title>
-                                    <Text>{complete ? 'Completed' : 'Not Completed'}</Text>
-                                    <Text>
-                                      Tasks: {completedTasks}/{tasks.length} (
-                                      {progressPercent.toFixed(2)}%)
-                                    </Text>
-                                  </Card>
-                                );
-                              }
-                            )}
-                          </div>
-                        ))}
+                        {Object.entries(data.achievement_diaries).map(
+                          ([region, difficulties]) => (
+                            <div key={region}>
+                              <Title order={5}>{region}</Title>
+                              {Object.entries(difficulties).map(
+                                ([difficulty, { complete, tasks }]) => {
+                                  const completedTasks = tasks.filter(
+                                    (task) => task === true
+                                  ).length;
+                                  const progressPercent =
+                                    (completedTasks / tasks.length) * 100;
+                                  return (
+                                    <Card
+                                      key={difficulty}
+                                      shadow="sm"
+                                      padding="lg"
+                                      radius="md"
+                                      withBorder
+                                      style={{ marginBottom: "10px" }}
+                                    >
+                                      <Title order={6}>
+                                        {difficulty} Diaries
+                                      </Title>
+                                      <Text>
+                                        {complete
+                                          ? "Completed"
+                                          : "Not Completed"}
+                                      </Text>
+                                      <Text>
+                                        Tasks: {completedTasks}/{tasks.length} (
+                                        {progressPercent.toFixed(2)}%)
+                                      </Text>
+                                    </Card>
+                                  );
+                                }
+                              )}
+                            </div>
+                          )
+                        )}
                       </Grid.Col>
                     </Grid>
                   </Collapse>

@@ -1,6 +1,6 @@
 {
   "name": "ab-list-maker",
-  "homepage": "https://susp3nse.github.io/ab-list-maker/",
+  "homepage": "https://susp3nse.github.io/ab",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -27,13 +27,13 @@
     "@emotion/styled": "^11.14.0",
     "@mantine/core": "7.16.1",
     "@mantine/hooks": "7.16.1",
-    "@tabler/icons-react": "^3.28.1",
-    "@tanstack/react-query": "^5.64.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.3"
   },
   "devDependencies": {
+    "@tabler/icons-react": "^3.28.1",
+    "@tanstack/react-query": "^5.64.2",
     "@eslint/js": "^9.18.0",
     "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
     "@storybook/react": "^8.5.0",
