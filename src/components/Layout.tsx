@@ -1,18 +1,20 @@
-import React from "react";
-import AppSidebar from "./SideBar";
+import { Outlet } from 'react-router-dom';
+import AppSidebar from './Sidebar/SideBar';
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout() {
   return (
     <>
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: "min-content 1fr",
-          height: "100%",
+          display: 'grid',
+          gridTemplateColumns: 'min-content 1fr',
+          height: '100%',
         }}
       >
-        <AppSidebar></AppSidebar>
-        <div>{children}</div>
+        <AppSidebar />
+        <div style={{ overflow: 'auto' }}>
+          <Outlet />
+        </div>
       </div>
     </>
   );
