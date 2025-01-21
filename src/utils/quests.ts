@@ -1,32 +1,33 @@
-interface OSRSSkills {
-  attack?: number;
-  defence?: number;
-  strength?: number;
-  ranged?: number;
-  prayer?: number;
-  magic?: number;
-  runecrafting?: number;
-  construction?: number;
+import { AchievementDiaries } from "../interfaces/WikiUserData";
 
-  hitpoints?: number;
-  agility?: number;
-  herblore?: number;
-  thieving?: number;
-  crafting?: number;
-  fletching?: number;
-  slayer?: number;
-  hunter?: number;
-
-  mining?: number;
-  smithing?: number;
-  fishing?: number;
-  cooking?: number;
-  firemaking?: number;
-  woodcutting?: number;
-  farming?: number;
+enum OSRSSkills {
+  Attack = "attack",
+  Defence = "defence",
+  Strength = "strength",
+  Ranged = "ranged",
+  Prayer = "prayer",
+  Magic = "magic",
+  Runecrafting = "runecrafting",
+  Construction = "construction",
+  Hitpoints = "hitpoints",
+  Agility = "agility",
+  Herblore = "herblore",
+  Thieving = "thieving",
+  Crafting = "crafting",
+  Fletching = "fletching",
+  Slayer = "slayer",
+  Hunter = "hunter",
+  Mining = "mining",
+  Smithing = "smithing",
+  Fishing = "fishing",
+  Cooking = "cooking",
+  Firemaking = "firemaking",
+  Woodcutting = "woodcutting",
+  Farming = "farming",
 }
-export interface OSRSQuests {
-  [key: string]: {
+
+export type OSRSQuests = {
+  [questName in OSRSQuest]: {
     fullName: string;
     builderName: string;
     completion?: {
@@ -34,12 +35,138 @@ export interface OSRSQuests {
       lamp: boolean;
     };
     requirements: {
-      skills: OSRSSkills;
+      skills: {
+        [skillName in OSRSSkills]?: number;
+      };
       questPoints: number;
       questsCompleted: string[];
       itemsRequired: string[];
     };
   };
+};
+
+export enum OSRSQuest {
+  AnimalMagnetism = "animalmag",
+  BarCrawl = "barcrawl",
+  BelowIceMountain = "belowicemountain",
+  BigChompyBirdHunting = "bigchompybirdhunting",
+  Biohazard = "biohazard",
+  BlackKnightsFortress = "blackknightfortress",
+  BoneVoyage = "bonevoyage",
+  ClientOfKourend = "clientkourend",
+  CooksAssistant = "cooks",
+  CreatureOfFenkenstrain = "creaturefenkenstrain",
+  DeathPlateau = "deathplateau",
+  DemonSlayer = "demonslayer",
+  DepthsOfDespair = "depthsdespair",
+  DigSite = "digsite",
+  DoricsQuest = "dorics",
+  DruidicRitual = "druidicritual",
+  DwarfCannon = "dwarfcanon",
+  ElementalWorkshopI = "elemworkshopone",
+  EnterTheAbyss = "enterabyss",
+  ErnestTheChicken = "ernestchicken",
+  FightArena = "fightarena",
+  FishingContest = "fishcontest",
+  FremennikTrials = "fremmytrials",
+  GertrudesCat = "gertrudes",
+  GhostsAhoy = "ghostsahoy",
+  GoblinDiplomacy = "goblindip",
+  GrandTree = "grandtree",
+  HazeelCult = "hazeelcult",
+  HolyGrail = "holygrail",
+  HorrorFromTheDeep = "horror",
+  ImpCatcher = "impcatcher",
+  ItchyHelper = "itchyhelper",
+  JunglePotion = "junglepotion",
+  KnightsSword = "knightsword",
+  LostCity = "lostcity",
+  LostTribe = "losttribe",
+  MakingHistory = "makinghistory",
+  MerlinsCrystal = "merlincrystal",
+  MonkeyMadness = "monkeymadness",
+  MonkeyMadnessII = "monkeymadnessdareo",
+  MonksFriend = "monksfriend",
+  MountainDaughter = "mountaindaughter",
+  MurderMystery = "murdermystery",
+  NatureSpirit = "naturespirit",
+  Observatory = "observatory",
+  OneSmallFavour = "onesmallfavour",
+  PiratesTreasure = "piratestreasure",
+  PlagueCity = "plaguecity",
+  PorcineOfInterest = "porcineofinterest",
+  PriestInPeril = "priestperil",
+  PrinceAliRescue = "princealirescue",
+  QueenOfThieves = "queenthieves",
+  RecruitmentDrive = "recruitmentdrive",
+  RestlessGhost = "restlessghost",
+  RecipeForDisasterGoblin = "rfdgoblin",
+  RecipeForDisasterStart = "rfdstart",
+  RomeoAndJuliet = "romeojuliet",
+  RuneMysteries = "runemysteries",
+  ScorpionCatcher = "scorpioncatcher",
+  SearchForMyReque = "searchofmyreque",
+  SeaSlug = "seaslug",
+  ShadowOfTheStorm = "shadowstorm",
+  SheepShearer = "sheepshearer",
+  ShiloVillage = "shilovillage",
+  SleepingGiants = "sleepinggiants",
+  TaiBaitRiots = "taibaitrio",
+  ATailOfTwoCats = "tailoftwocats",
+  TempleOfEye = "templeeye",
+  TheFeud = "thefeud",
+  TheGolem = "thegolem",
+  TouristTrap = "touristtrap",
+  TreeGnomeVillage = "treegnomevillage",
+  TribalTotem = "tribaltotem",
+  TrollRomance = "trollromance",
+  TrollStronghold = "trollstronghold",
+  UndergroundPass = "ugpass",
+  VampireSlayer = "vampireslayer",
+  VarrockMuseum = "varrockmuseum",
+  Wanted = "wanted",
+  WaterfallQuest = "waterfall",
+  TheWitchsHouse = "witchshouse",
+  WitchsPotion = "witchspotion",
+  XMarksTheSpot = "xmarks",
+  ZogreFleshEaters = "zogreflesheaters",
+  ChildrenOfTheSun = "childrensun",
+  Contact = "contact",
+  SheepHerder = "sheepherder",
+  Regicide = "regicide",
+  RovingElves = "rovingelves",
+  MeponeI = "mepone",
+  MeponeII = "meptwo",
+  AidMyReque = "aidmyreque",
+  DarknessInTheHallowVale = "darknesshallowvale",
+  TasteOfHope = "tastehope",
+  TempleOfIkov = "templeikov",
+  DesertTreasureI = "deserttreasureone",
+  EnlightenedJourney = "enlightenedjourney",
+  Watchtower = "watchtower",
+  RecipeForDisasterDwarf = "rfddwarf",
+  RecipeForDisasterDave = "rfdave",
+  RecipeForDisasterGuide = "rfdguide",
+  RecipeForDisasterPete = "rfdpete",
+  RecipeForDisasterSkrach = "rfdskrach",
+  RecipeForDisasterMonkey = "rfdmonkey",
+}
+
+export interface WikiUserData {
+  username: string;
+  timestamp: string;
+  quests: {
+    [questName: string]: number;
+  };
+  achievement_diaries: AchievementDiaries;
+  levels: {
+    [skillName: string]: number;
+  };
+  music_tracks: {
+    [trackName: string]: boolean;
+  };
+  combat_achievements: number[];
+  league_tasks: string[];
 }
 export const OSRSQuests: OSRSQuests = {
   animalmag: {
