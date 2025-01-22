@@ -15,7 +15,7 @@ import {
   Title,
 } from "@mantine/core";
 import { useUserData } from "@/utils/querys.js";
-import QuestBuilderPage from "./Builder.js";
+import QuestBuilderPage from "../components/Builder.js";
 import allOSRSQuests from "@/utils/quests.js";
 
 const AccountLookup = () => {
@@ -37,8 +37,8 @@ const AccountLookup = () => {
   };
 
   return (
-    <div>
-      <Center style={{ minHeight: "100vh", flexDirection: "column" }}>
+    <>
+      <Center style={{ minHeight: "100%", flexDirection: "column" }}>
         <Title order={1}>OSRS Account Lookup</Title>
         <Text size="lg" c="dimmed" style={{ marginBottom: "20px" }}>
           Enter your account name to see your achievements, quests, and stats.
@@ -58,7 +58,7 @@ const AccountLookup = () => {
         </Button>
         {fetchUser && <AccountInfo userName={userName} />}
       </Center>
-    </div>
+    </>
   );
 };
 

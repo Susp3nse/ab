@@ -1,8 +1,9 @@
 import { createHashRouter, RouterProvider } from "react-router-dom";
-import Layout from "./components/Layout.js";
+import Layout from "./components/Layout/Layout.js";
 import { Navigate } from "react-router-dom";
 import { lazy } from "react";
-const QuestBuilder = lazy(() => import("./pages/Builder.js"));
+import PremadeLists from "./pages/Premade.page.js";
+const QuestBuilder = lazy(() => import("./components/Builder.js"));
 const HomePage = lazy(() => import("./pages/Home.page.js"));
 const AccountLookup = lazy(() => import("./pages/Lookup.page.js"));
 export const routes = [
@@ -16,6 +17,11 @@ export const routes = [
     path: "quest-builder",
     label: "Account Builder",
     element: <AccountLookup />,
+  },
+  {
+    path: "premade",
+    label: "Premade Lists",
+    element: <PremadeLists />,
   },
 ];
 

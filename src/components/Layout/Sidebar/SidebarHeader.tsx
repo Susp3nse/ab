@@ -1,46 +1,6 @@
-import styled from "@emotion/styled";
-import { NavLink } from "react-router-dom";
-import { Group } from "@mantine/core";
 import { Typography } from "@/utils/Typography.js";
-import classes from "./SideBar.module.css";
-const routes = [
-  {
-    path: "home",
-    label: "Home",
-  },
-  {
-    path: "quest-builder",
-    label: "Quest Builder",
-  },
-];
-export default function NavSideBar() {
-  const links = routes.map((item) => (
-    <>
-      {item.path && (
-        <NavLink
-          className={({ isActive }) => (isActive ? classes.link : classes.link)}
-          to={item.path}
-          key={item.label}
-        >
-          <span>{item.label}</span>
-        </NavLink>
-      )}
-    </>
-  ));
+import styled from "@emotion/styled";
 
-  return (
-    <nav className={classes.navbar}>
-      <div className={classes.navbarMain}>
-        <Group className={classes.header} justify="space-between">
-          <SidebarHeader style={{ marginBottom: "24px", marginTop: "16px" }} />
-        </Group>
-        {links}
-      </div>
-
-      <div className={classes.footer}>v 1.0.0</div>
-    </nav>
-  );
-}
 interface SidebarHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
 }
@@ -86,3 +46,4 @@ export const SidebarHeader: React.FC<SidebarHeaderProps> = ({ ...rest }) => {
     </StyledSidebarHeader>
   );
 };
+export default SidebarHeader;

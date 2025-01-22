@@ -62,7 +62,7 @@ export enum OSRSQuestNames {
   DigSite = "digsite",
   DoricsQuest = "dorics",
   DruidicRitual = "druidicritual",
-  DwarfCannon = "dwarfcanon",
+  DwarfCannon = "dwarfcannon",
   ElementalWorkshopI = "elemworkshopone",
   EnterTheAbyss = "enterabyss",
   ErnestTheChicken = "ernestchicken",
@@ -79,7 +79,7 @@ export enum OSRSQuestNames {
   ImpCatcher = "impcatcher",
   ItchyHelper = "itchyhelper",
   JunglePotion = "junglepotion",
-  KnightsSword = "knightsword",
+  KnightsSword = "knightssword",
   LostCity = "lostcity",
   LostTribe = "losttribe",
   MakingHistory = "makinghistory",
@@ -356,9 +356,9 @@ export const allOSRSQuests: OSRSQuests = {
       itemsRequired: ["Herb bag", "Axe"],
     },
   },
-  dwarfcanon: {
+  dwarfcannon: {
     fullName: "Dwarf Cannon",
-    builderName: "dwarfcanon",
+    builderName: "dwarfcannon",
     requirements: {
       skills: {
         ranged: 35,
@@ -568,9 +568,9 @@ export const allOSRSQuests: OSRSQuests = {
       itemsRequired: ["Jungle herb", "Tar"],
     },
   },
-  knightsword: {
+  knightssword: {
     fullName: "The Knight's Sword",
-    builderName: "knightsword",
+    builderName: "knightssword",
     requirements: {
       skills: {
         mining: 15,
