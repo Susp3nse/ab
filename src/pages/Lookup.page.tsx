@@ -109,17 +109,21 @@ const AccountInfo = ({ userName }: { userName: string }) => {
               <Grid style={{ marginTop: "10px" }}>
                 {Object.entries(data.levels).map(([skillName, level]) => (
                   <Grid.Col span={12} key={skillName}>
-                    <Group>
-                      <Text>
-                        {skillName}: {level}
-                      </Text>
-                      <Progress
-                        value={(level / 99) * 100} // Assuming max level is 99 for skills
-                        size="xs"
-                        color="blue"
-                        style={{ width: "80%" }}
-                      />
-                    </Group>
+                    <Grid>
+                      <Grid.Col span={2}>
+                        <Text>
+                          {skillName}: {level}
+                        </Text>
+                      </Grid.Col>
+                      <Grid.Col span={10}>
+                        <Progress
+                          value={(level / 99) * 100} // Assuming max level is 99 for skills
+                          size="xs"
+                          color="blue"
+                          style={{ width: "80%" }}
+                        />
+                      </Grid.Col>
+                    </Grid>
                   </Grid.Col>
                 ))}
               </Grid>
