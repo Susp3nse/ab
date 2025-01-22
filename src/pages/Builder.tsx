@@ -47,7 +47,7 @@ const QuestBuilderPage = () => {
   };
 
   return (
-    <Center style={{ minHeight: "100vh", flexDirection: "column" }}>
+    <Center style={{ flexDirection: "column" }}>
       <Title order={1}>AB Task Builder</Title>
       <Text size="lg" c="dimmed" style={{ marginBottom: "20px" }}>
         Select tasks to build a custom task list for AB

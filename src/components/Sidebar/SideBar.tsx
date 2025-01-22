@@ -9,10 +9,6 @@ const routes = [
     label: "Home",
   },
   {
-    path: "wiki-lookup",
-    label: "Account Lookup",
-  },
-  {
     path: "quest-builder",
     label: "Quest Builder",
   },

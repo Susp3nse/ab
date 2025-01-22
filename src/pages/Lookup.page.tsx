@@ -15,6 +15,7 @@ import {
   Title,
 } from "@mantine/core";
 import { useUserData } from "@/utils/querys.js";
+import QuestBuilderPage from "./Builder.js";
 
 const AccountLookup = () => {
   const [userName, setUserName] = useState<string>("");
@@ -122,6 +123,11 @@ const AccountInfo = ({ userName }: { userName: string }) => {
           {/* Column for Quests and Diaries */}
           <Grid.Col span={6}>
             <Grid gutter="md">
+              <Grid.Col span={12}>
+                <Card shadow="sm" padding="lg" radius="md" withBorder>
+                  <QuestBuilderPage></QuestBuilderPage>
+                </Card>
+              </Grid.Col>
               {/* Card for Quests */}
               <Grid.Col span={12}>
                 <Card shadow="sm" padding="lg" radius="md" withBorder>

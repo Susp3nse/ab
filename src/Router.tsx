@@ -13,14 +13,9 @@ export const routes = [
     element: <HomePage />,
   },
   {
-    path: "wiki-lookup",
-    label: "Account Lookup",
-    element: <AccountLookup />,
-  },
-  {
     path: "quest-builder",
-    label: "Quest Builder",
-    element: <QuestBuilder />,
+    label: "Account Builder",
+    element: <AccountLookup />,
   },
 ];
 
