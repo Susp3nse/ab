@@ -8,7 +8,7 @@ export const routes = [
   },
   {
     path: "quest-builder",
-    label: "Quest Builder",
+    label: "Task List Builder",
     icon: IconList,
   },
   {

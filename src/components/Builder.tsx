@@ -12,7 +12,7 @@ import {
 } from "@mantine/core";
 import allOSRSQuests, { skillOptions } from "@/utils/quests.js";
 
-const QuestBuilderPage = ({
+const TaskListBuilder = ({
   selectedBuilders,
   setSelectedBuilders,
 }: {
@@ -115,4 +115,4 @@ const QuestBuilderPage = ({
   );
 };
 
-export default QuestBuilderPage;
+export default TaskListBuilder;

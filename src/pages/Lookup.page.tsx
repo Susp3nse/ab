@@ -10,13 +10,15 @@ import {
   Group,
   Loader,
   Progress,
+  SimpleGrid,
   Text,
   TextInput,
   Title,
 } from "@mantine/core";
 import { useUserData } from "@/utils/querys.js";
-import QuestBuilderPage from "../components/Builder.js";
+import TaskListBuilder from "../components/Builder.js";
 import allOSRSQuests from "@/utils/quests.js";
+import WikiUserData from "@/interfaces/WikiUserData.js";
 
 const AccountLookup = () => {
   const [userName, setUserName] = useState<string>("");
@@ -62,6 +64,40 @@ const AccountLookup = () => {
   );
 };
 
+const AccountSkills = ({ user }: { user: WikiUserData }) => {
+  const skillInfo = Object.entries(user.levels);
+  return (
+    <Card shadow="sm" padding="lg" radius="md" withBorder>
+      <Center>
+        <Title order={3}>{user.username}</Title>
+      </Center>
+      <Center>
+        <Text
+          size="sm"
+          color="dimmed"
+        >{`Last updated: ${user.timestamp}`}</Text>
+      </Center>
+
+      {/* Skills Section (Non-Collapsible) */}
+      <Center>
+        <Title order={4} style={{ marginTop: "20px" }}>
+          Skills
+        </Title>
+      </Center>
+      <SimpleGrid
+        cols={3}
+        style={{ marginTop: "10px", padding: "16px", justifyItems: "center" }}
+      >
+        {skillInfo.map(([skillName, level]) => (
+          <Text>
+            {skillName}: {level}
+          </Text>
+        ))}
+      </SimpleGrid>
+    </Card>
+  );
+};
+
 const AccountInfo = ({ userName }: { userName: string }) => {
   const { data, isLoading, error } = useUserData(userName);
   const [questsOpened, setQuestsOpened] = useState(false);
@@ -84,6 +120,7 @@ const AccountInfo = ({ userName }: { userName: string }) => {
         return { text: "Unknown", color: "gray" };
     }
   };
+
   return (
     <>
       {/* Loading and Error State */}
@@ -95,39 +132,7 @@ const AccountInfo = ({ userName }: { userName: string }) => {
         <Grid style={{ width: "100%", maxWidth: "95%" }} gutter="md">
           {/* Card for Username and Skills */}
           <Grid.Col span={6}>
-            <Card shadow="sm" padding="lg" radius="md" withBorder>
-              <Title order={3}>{data.username}</Title>
-              <Text
-                size="sm"
-                color="dimmed"
-              >{`Last updated: ${data.timestamp}`}</Text>
-
-              {/* Skills Section (Non-Collapsible) */}
-              <Title order={4} style={{ marginTop: "20px" }}>
-                Skills
-              </Title>
-              <Grid style={{ marginTop: "10px" }}>
-                {Object.entries(data.levels).map(([skillName, level]) => (
-                  <Grid.Col span={12} key={skillName}>
-                    <Grid>
-                      <Grid.Col span={2}>
-                        <Text>
-                          {skillName}: {level}
-                        </Text>
-                      </Grid.Col>
-                      <Grid.Col span={10}>
-                        <Progress
-                          value={(level / 99) * 100} // Assuming max level is 99 for skills
-                          size="xs"
-                          color="blue"
-                          style={{ width: "80%" }}
-                        />
-                      </Grid.Col>
-                    </Grid>
-                  </Grid.Col>
-                ))}
-              </Grid>
-            </Card>
+            <AccountSkills user={data}></AccountSkills>
           </Grid.Col>
 
           {/* Card for Quests and Diaries */}
@@ -136,7 +141,7 @@ const AccountInfo = ({ userName }: { userName: string }) => {
             <Grid gutter="md">
               <Grid.Col span={12}>
                 <Card shadow="sm" padding="lg" radius="md" withBorder>
-                  <QuestBuilderPage
+                  <TaskListBuilder
                     selectedBuilders={selectedBuilders}
                     setSelectedBuilders={setSelectedBuilders}
                   />
