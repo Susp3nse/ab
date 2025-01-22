@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
+import { IconChevronDown, IconChevronUp, IconPlus } from "@tabler/icons-react";
 import {
   ActionIcon,
   Button,
@@ -16,6 +16,7 @@ import {
 } from "@mantine/core";
 import { useUserData } from "@/utils/querys.js";
 import QuestBuilderPage from "./Builder.js";
+import allOSRSQuests from "@/utils/quests.js";
 
 const AccountLookup = () => {
   const [userName, setUserName] = useState<string>("");
@@ -65,6 +66,12 @@ const AccountInfo = ({ userName }: { userName: string }) => {
   const { data, isLoading, error } = useUserData(userName);
   const [questsOpened, setQuestsOpened] = useState(false);
   const [diariesOpened, setDiariesOpened] = useState(false);
+  const [selectedBuilders, setSelectedBuilders] = useState<string[]>([]);
+  const addQuestToList = (name: string | undefined) => {
+    if (name) {
+      setSelectedBuilders([...selectedBuilders, name]);
+    }
+  };
   const mapQuestProgress = (status: number) => {
     switch (status) {
       case 0:
@@ -125,7 +132,10 @@ const AccountInfo = ({ userName }: { userName: string }) => {
             <Grid gutter="md">
               <Grid.Col span={12}>
                 <Card shadow="sm" padding="lg" radius="md" withBorder>
-                  <QuestBuilderPage></QuestBuilderPage>
+                  <QuestBuilderPage
+                    selectedBuilders={selectedBuilders}
+                    setSelectedBuilders={setSelectedBuilders}
+                  />
                 </Card>
               </Grid.Col>
               {/* Card for Quests */}
@@ -151,14 +161,47 @@ const AccountInfo = ({ userName }: { userName: string }) => {
                           {Object.entries(data.quests).map(
                             ([quest, status]) => {
                               const { text, color } = mapQuestProgress(status);
+                              const ABQuest = Object.entries(
+                                allOSRSQuests
+                              ).find(([_, value]) => value.fullName === quest);
+                              const ABquestObj = ABQuest?.[1];
+                              const inList = selectedBuilders.includes(
+                                ABquestObj?.builderName ?? ""
+                              );
+                              const isImplemented = !!ABQuest;
+                              const isCompletedOrImplemented =
+                                !!ABQuest || text === "Completed";
                               return (
-                                <li key={quest}>
+                                <ul key={quest}>
                                   <Group>
-                                    <Text color={color}>
-                                      {quest}: {text}
+                                    <ActionIcon
+                                      disabled={!isImplemented || inList}
+                                      variant="filled"
+                                      size="sm"
+                                      aria-label="Settings"
+                                      onClick={() =>
+                                        addQuestToList(ABquestObj?.builderName)
+                                      }
+                                    >
+                                      <IconPlus
+                                        style={{ width: "70%", height: "70%" }}
+                                        stroke={1.5}
+                                      />
+                                    </ActionIcon>
+                                    <Text
+                                      c={
+                                        isCompletedOrImplemented
+                                          ? color
+                                          : "orange"
+                                      }
+                                    >
+                                      {quest}:{" "}
+                                      {isCompletedOrImplemented
+                                        ? text
+                                        : "Not Implemented Yet"}
                                     </Text>
                                   </Group>
-                                </li>
+                                </ul>
                               );
                             }
                           )}

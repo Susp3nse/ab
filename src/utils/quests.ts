@@ -184,7 +184,7 @@ export const allOSRSQuests: OSRSQuests = {
     },
   },
   barcrawl: {
-    fullName: "Bar Crawl",
+    fullName: "Alfred Grimhand's Barcrawl",
     builderName: "barcrawl",
     requirements: {
       skills: {},
@@ -228,7 +228,7 @@ export const allOSRSQuests: OSRSQuests = {
     },
   },
   blackknightfortress: {
-    fullName: "Black Knight's Fortress",
+    fullName: "Black Knights' Fortress",
     builderName: "blackknightfortress",
     requirements: {
       skills: {
@@ -312,7 +312,7 @@ export const allOSRSQuests: OSRSQuests = {
     },
   },
   depthsdespair: {
-    fullName: "Depths of Despair",
+    fullName: "The Depths of Despair",
     builderName: "depthsdespair",
     requirements: {
       skills: {},
@@ -334,7 +334,7 @@ export const allOSRSQuests: OSRSQuests = {
     },
   },
   dorics: {
-    fullName: "Dorics Quest",
+    fullName: "Doric's Quest",
     builderName: "dorics",
     requirements: {
       skills: {
@@ -433,7 +433,7 @@ export const allOSRSQuests: OSRSQuests = {
     },
   },
   fremmytrials: {
-    fullName: "Fremennik Trials",
+    fullName: "The Fremennik Trials",
     builderName: "fremmytrials",
     requirements: {
       skills: {
@@ -508,7 +508,7 @@ export const allOSRSQuests: OSRSQuests = {
     },
   },
   holygrail: {
-    fullName: "The Holy Grail",
+    fullName: "Holy Grail",
     builderName: "holygrail",
     requirements: {
       skills: {
@@ -544,7 +544,7 @@ export const allOSRSQuests: OSRSQuests = {
     },
   },
   itchyhelper: {
-    fullName: "The Itchy Helper",
+    fullName: "Icthlarin's Little Helper",
     builderName: "itchyhelper",
     requirements: {
       skills: {
@@ -706,7 +706,7 @@ export const allOSRSQuests: OSRSQuests = {
     },
   },
   observatory: {
-    fullName: "The Observatory Quest",
+    fullName: "Observatory Quest",
     builderName: "observatory",
     requirements: {
       skills: {
@@ -754,7 +754,7 @@ export const allOSRSQuests: OSRSQuests = {
     },
   },
   porcineofinterest: {
-    fullName: "Porcine of Interest",
+    fullName: "A Porcine of Interest",
     builderName: "porcineofinterest",
     requirements: {
       skills: {
@@ -831,7 +831,7 @@ export const allOSRSQuests: OSRSQuests = {
     },
   },
   rfdgoblin: {
-    fullName: "Recipe for Disaster - Goblin subquest",
+    fullName: "Recipe for Disaster - Wartface & Bentnoze",
     builderName: "rfdgoblin",
     requirements: {
       skills: {
@@ -843,7 +843,7 @@ export const allOSRSQuests: OSRSQuests = {
     },
   },
   rfdstart: {
-    fullName: "Recipe for Disaster - Start",
+    fullName: "Recipe for Disaster - Another Cook's Quest",
     builderName: "rfdstart",
     requirements: {
       skills: {},
@@ -888,7 +888,7 @@ export const allOSRSQuests: OSRSQuests = {
     },
   },
   searchofmyreque: {
-    fullName: "Search for My Reque",
+    fullName: "In Search of the Myreque",
     builderName: "searchofmyreque",
     requirements: {
       skills: {
@@ -959,7 +959,7 @@ export const allOSRSQuests: OSRSQuests = {
     },
   },
   taibaitrio: {
-    fullName: "Tai Bait Riots",
+    fullName: "Tai Bwo Wannai Trio",
     builderName: "taibaitrio",
     requirements: {
       skills: {
@@ -984,7 +984,7 @@ export const allOSRSQuests: OSRSQuests = {
     },
   },
   templeeye: {
-    fullName: "Temple of Eye",
+    fullName: "Temple of the Eye",
     builderName: "templeeye",
     requirements: {
       skills: {},
@@ -1019,7 +1019,7 @@ export const allOSRSQuests: OSRSQuests = {
     },
   },
   touristtrap: {
-    fullName: "Tourist Trap",
+    fullName: "The Tourist Trap",
     builderName: "touristtrap",
     requirements: {
       skills: {
@@ -1095,7 +1095,7 @@ export const allOSRSQuests: OSRSQuests = {
     },
   },
   vampireslayer: {
-    fullName: "Vampire Slayer",
+    fullName: "Vampyre Slayer",
     builderName: "vampireslayer",
     requirements: {
       skills: {},
@@ -1141,7 +1141,7 @@ export const allOSRSQuests: OSRSQuests = {
     },
   },
   witchshouse: {
-    fullName: "The Witch's House",
+    fullName: "Witch's House",
     builderName: "witchshouse",
     requirements: {
       skills: {
@@ -1254,7 +1254,7 @@ export const allOSRSQuests: OSRSQuests = {
     },
   },
   mepone: {
-    fullName: "Mepone I",
+    fullName: "Mourning's End Part I",
     builderName: "mepone",
     requirements: {
       skills: {},
@@ -1264,7 +1264,7 @@ export const allOSRSQuests: OSRSQuests = {
     },
   },
   meptwo: {
-    fullName: "Mepone II",
+    fullName: "Mourning's End Part II",
     builderName: "meptwo",
     requirements: {
       skills: {},
@@ -1274,7 +1274,7 @@ export const allOSRSQuests: OSRSQuests = {
     },
   },
   aidmyreque: {
-    fullName: "Aid My Reque",
+    fullName: "In Aid of the Myreque",
     builderName: "aidmyreque",
     requirements: {
       skills: {
@@ -1287,7 +1287,7 @@ export const allOSRSQuests: OSRSQuests = {
     },
   },
   darknesshallowvale: {
-    fullName: "Darkness in the Hallow Vale",
+    fullName: "Darkness of Hallowvale",
     builderName: "darknesshallowvale",
     requirements: {
       skills: {
@@ -1299,7 +1299,7 @@ export const allOSRSQuests: OSRSQuests = {
     },
   },
   tastehope: {
-    fullName: "Taste of Hope",
+    fullName: "A Taste of Hope",
     builderName: "tastehope",
     requirements: {
       skills: {
@@ -1364,7 +1364,7 @@ export const allOSRSQuests: OSRSQuests = {
     },
   },
   rfddwarf: {
-    fullName: "Recipe for Disaster - Dwarf subquest",
+    fullName: "Recipe for Disaster - Mountain Dwarf",
     builderName: "rfddwarf",
     requirements: {
       skills: {
@@ -1376,7 +1376,7 @@ export const allOSRSQuests: OSRSQuests = {
     },
   },
   rfdave: {
-    fullName: "Recipe for Disaster - Dave subquest",
+    fullName: "Recipe for Disaster - Evil Dave",
     builderName: "rfdave",
     requirements: {
       skills: {
@@ -1388,7 +1388,7 @@ export const allOSRSQuests: OSRSQuests = {
     },
   },
   rfdguide: {
-    fullName: "Recipe for Disaster - Guide subquest",
+    fullName: "Recipe for Disaster - Lumbridge Guide",
     builderName: "rfdguide",
     requirements: {
       skills: {
@@ -1400,7 +1400,7 @@ export const allOSRSQuests: OSRSQuests = {
     },
   },
   rfdpete: {
-    fullName: "Recipe for Disaster - Pete subquest",
+    fullName: "Recipe for Disaster - Pirate Pete",
     builderName: "rfdpete",
     requirements: {
       skills: {
@@ -1412,7 +1412,7 @@ export const allOSRSQuests: OSRSQuests = {
     },
   },
   rfdskrach: {
-    fullName: "Recipe for Disaster - Skrach subquest",
+    fullName: "Recipe for Disaster - Skrach Uglogwee",
     builderName: "rfdskrach",
     requirements: {
       skills: {
@@ -1424,7 +1424,7 @@ export const allOSRSQuests: OSRSQuests = {
     },
   },
   rfdmonkey: {
-    fullName: "Recipe for Disaster - Monkey subquest",
+    fullName: "Recipe for Disaster - King Awowogei",
     builderName: "rfdmonkey",
     requirements: {
       skills: {

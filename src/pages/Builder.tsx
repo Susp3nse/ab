@@ -12,9 +12,14 @@ import {
 } from "@mantine/core";
 import allOSRSQuests, { skillOptions } from "@/utils/quests.js";
 
-const QuestBuilderPage = () => {
+const QuestBuilderPage = ({
+  selectedBuilders,
+  setSelectedBuilders,
+}: {
+  selectedBuilders: string[];
+  setSelectedBuilders: (strs: string[]) => void;
+}) => {
   // State to keep track of selected builder names
-  const [selectedBuilders, setSelectedBuilders] = useState<string[]>([]);
 
   // Handler to update the selected builders list
   const handleSelect = (value: string[] | null) => {
