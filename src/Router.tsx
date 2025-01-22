@@ -6,12 +6,7 @@ const PremadeLists = lazy(() => import("./pages/Premade.page.js"));
 const HomePage = lazy(() => import("./pages/Home.page.js"));
 const AccountLookup = lazy(() => import("./pages/Lookup.page.js"));
 export const routes = [
-  { index: true, element: <Navigate to="home" replace /> },
-  {
-    path: "home",
-    label: "Home",
-    element: <HomePage />,
-  },
+  { index: true, element: <Navigate to="quest-builder" replace /> },
   {
     path: "quest-builder",
     label: "Account Builder",

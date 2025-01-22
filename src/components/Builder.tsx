@@ -95,7 +95,7 @@ const TaskListBuilder = ({
         {/* Copy to clipboard button */}
         <Group style={{ marginTop: "10px" }}>
           <Tooltip label="Copy to clipboard" withArrow>
-            <Button variant="light" color="blue" onClick={copyToClipboard}>
+            <Button variant="light" onClick={copyToClipboard}>
               Copy
             </Button>
           </Tooltip>
