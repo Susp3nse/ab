@@ -9,7 +9,6 @@ import {
   Grid,
   Group,
   Loader,
-  Progress,
   SimpleGrid,
   Text,
   TextInput,
@@ -19,6 +18,7 @@ import { useUserData } from "@/utils/querys.js";
 import TaskListBuilder from "../components/Builder.js";
 import allOSRSQuests from "@/utils/quests.js";
 import WikiUserData from "@/interfaces/WikiUserData.js";
+import SkillTaskSelector from "@/components/BuilderSelector.js";
 
 const AccountLookup = () => {
   const [userName, setUserName] = useState<string>("");
@@ -64,7 +64,15 @@ const AccountLookup = () => {
   );
 };
 
-const AccountSkills = ({ user }: { user: WikiUserData }) => {
+const AccountSkills = ({
+  user,
+  selectedBuilders,
+  setSelectedBuilders,
+}: {
+  user: WikiUserData;
+  selectedBuilders: string[];
+  setSelectedBuilders: (str: string[]) => void;
+}) => {
   const skillInfo = Object.entries(user.levels);
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder>
@@ -72,10 +80,7 @@ const AccountSkills = ({ user }: { user: WikiUserData }) => {
         <Title order={3}>{user.username}</Title>
       </Center>
       <Center>
-        <Text
-          size="sm"
-          color="dimmed"
-        >{`Last updated: ${user.timestamp}`}</Text>
+        <Text size="sm" c="dimmed">{`Last updated: ${user.timestamp}`}</Text>
       </Center>
 
       {/* Skills Section (Non-Collapsible) */}
@@ -94,20 +99,28 @@ const AccountSkills = ({ user }: { user: WikiUserData }) => {
           </Text>
         ))}
       </SimpleGrid>
+      <Center>
+        <SkillTaskSelector
+          selectedBuilders={selectedBuilders}
+          setSelectedBuilders={setSelectedBuilders}
+        />
+      </Center>
     </Card>
   );
 };
 
-const AccountInfo = ({ userName }: { userName: string }) => {
-  const { data, isLoading, error } = useUserData(userName);
-  const [questsOpened, setQuestsOpened] = useState(false);
-  const [diariesOpened, setDiariesOpened] = useState(false);
-  const [selectedBuilders, setSelectedBuilders] = useState<string[]>([]);
-  const addQuestToList = (name: string | undefined) => {
-    if (name) {
-      setSelectedBuilders([...selectedBuilders, name]);
-    }
+const QuestCard = ({
+  addQuestToList,
+  selectedBuilders,
+  quests,
+}: {
+  addQuestToList: (str: string | undefined) => void;
+  selectedBuilders: string[];
+  quests: {
+    [questName: string]: number;
   };
+}) => {
+  const [questsOpened, setQuestsOpened] = useState(false);
   const mapQuestProgress = (status: number) => {
     switch (status) {
       case 0:
@@ -118,6 +131,143 @@ const AccountInfo = ({ userName }: { userName: string }) => {
         return { text: "Completed", color: "green" };
       default:
         return { text: "Unknown", color: "gray" };
+    }
+  };
+  return (
+    <>
+      <Card shadow="sm" padding="lg" radius="md" withBorder>
+        <Group style={{ marginTop: "20px" }}>
+          <Title order={4}>Quests</Title>
+          <ActionIcon onClick={() => setQuestsOpened((prev) => !prev)}>
+            {questsOpened ? (
+              <IconChevronUp size={16} />
+            ) : (
+              <IconChevronDown size={16} />
+            )}
+          </ActionIcon>
+        </Group>
+
+        <Collapse in={questsOpened}>
+          <Grid style={{ marginTop: "10px" }}>
+            <Grid.Col span={12}>
+              <ul>
+                {Object.entries(quests).map(([quest, status]) => {
+                  const { text, color } = mapQuestProgress(status);
+                  const ABQuest = Object.entries(allOSRSQuests).find(
+                    ([_, value]) => value.fullName === quest
+                  );
+                  const ABquestObj = ABQuest?.[1];
+                  const inList = selectedBuilders.includes(
+                    ABquestObj?.builderName ?? ""
+                  );
+                  const isImplemented = !!ABQuest;
+                  const isCompletedOrImplemented =
+                    !!ABQuest || text === "Completed";
+                  return (
+                    <ul key={quest}>
+                      <Group>
+                        <ActionIcon
+                          disabled={!isImplemented || inList}
+                          variant="filled"
+                          size="sm"
+                          aria-label="Settings"
+                          onClick={() =>
+                            addQuestToList(ABquestObj?.builderName)
+                          }
+                        >
+                          <IconPlus
+                            style={{ width: "70%", height: "70%" }}
+                            stroke={1.5}
+                          />
+                        </ActionIcon>
+                        <Text c={isCompletedOrImplemented ? color : "orange"}>
+                          {quest}:{" "}
+                          {isCompletedOrImplemented
+                            ? text
+                            : "Not Implemented Yet"}
+                        </Text>
+                      </Group>
+                    </ul>
+                  );
+                })}
+              </ul>
+            </Grid.Col>
+          </Grid>
+        </Collapse>
+      </Card>
+    </>
+  );
+};
+
+const DiariesCard = ({ user }: { user: WikiUserData }) => {
+  const [diariesOpened, setDiariesOpened] = useState(false);
+  return (
+    <>
+      {" "}
+      <Card shadow="sm" padding="lg" radius="md" withBorder>
+        <Group style={{ marginTop: "20px" }}>
+          <Title order={4}>Achievement Diaries</Title>
+          <ActionIcon onClick={() => setDiariesOpened((prev) => !prev)}>
+            {diariesOpened ? (
+              <IconChevronUp size={16} />
+            ) : (
+              <IconChevronDown size={16} />
+            )}
+          </ActionIcon>
+        </Group>
+
+        <Collapse in={diariesOpened}>
+          <Grid style={{ marginTop: "10px" }}>
+            <Grid.Col span={12}>
+              {Object.entries(user.achievement_diaries).map(
+                ([region, difficulties]) => (
+                  <div key={region}>
+                    <Title order={5}>{region}</Title>
+                    {Object.entries(difficulties).map(
+                      ([difficulty, { complete, tasks }]) => {
+                        const completedTasks = tasks.filter(
+                          (task) => task === true
+                        ).length;
+                        const progressPercent =
+                          (completedTasks / tasks.length) * 100;
+                        return (
+                          <Card
+                            key={difficulty}
+                            shadow="sm"
+                            padding="lg"
+                            radius="md"
+                            withBorder
+                            style={{ marginBottom: "10px" }}
+                          >
+                            <Title order={6}>{difficulty} Diaries</Title>
+                            <Text>
+                              {complete ? "Completed" : "Not Completed"}
+                            </Text>
+                            <Text>
+                              Tasks: {completedTasks}/{tasks.length} (
+                              {progressPercent.toFixed(2)}%)
+                            </Text>
+                          </Card>
+                        );
+                      }
+                    )}
+                  </div>
+                )
+              )}
+            </Grid.Col>
+          </Grid>
+        </Collapse>
+      </Card>
+    </>
+  );
+};
+
+const AccountInfo = ({ userName }: { userName: string }) => {
+  const { data, isLoading, error } = useUserData(userName);
+  const [selectedBuilders, setSelectedBuilders] = useState<string[]>([]);
+  const addQuestToList = (name: string | undefined) => {
+    if (name) {
+      setSelectedBuilders([...selectedBuilders, name]);
     }
   };
 
@@ -132,11 +282,32 @@ const AccountInfo = ({ userName }: { userName: string }) => {
         <Grid style={{ width: "100%", maxWidth: "95%" }} gutter="md">
           {/* Card for Username and Skills */}
           <Grid.Col span={6}>
-            <AccountSkills user={data}></AccountSkills>
+            <Grid>
+              <Grid.Col span={12}>
+                {" "}
+                <AccountSkills
+                  user={data}
+                  selectedBuilders={selectedBuilders}
+                  setSelectedBuilders={setSelectedBuilders}
+                ></AccountSkills>
+              </Grid.Col>
+
+              <Grid.Col span={12}>
+                {/* Card for Quests */}
+                <QuestCard
+                  quests={data.quests}
+                  selectedBuilders={selectedBuilders}
+                  addQuestToList={addQuestToList}
+                ></QuestCard>
+              </Grid.Col>
+
+              {/* Card for Achievement Diaries */}
+              <Grid.Col span={12}>
+                <DiariesCard user={data}></DiariesCard>
+              </Grid.Col>
+            </Grid>
           </Grid.Col>
 
-          {/* Card for Quests and Diaries */}
-          {/* Column for Quests and Diaries */}
           <Grid.Col span={6}>
             <Grid gutter="md">
               <Grid.Col span={12}>
@@ -145,143 +316,6 @@ const AccountInfo = ({ userName }: { userName: string }) => {
                     selectedBuilders={selectedBuilders}
                     setSelectedBuilders={setSelectedBuilders}
                   />
-                </Card>
-              </Grid.Col>
-              {/* Card for Quests */}
-              <Grid.Col span={12}>
-                <Card shadow="sm" padding="lg" radius="md" withBorder>
-                  <Group style={{ marginTop: "20px" }}>
-                    <Title order={4}>Quests</Title>
-                    <ActionIcon
-                      onClick={() => setQuestsOpened((prev) => !prev)}
-                    >
-                      {questsOpened ? (
-                        <IconChevronUp size={16} />
-                      ) : (
-                        <IconChevronDown size={16} />
-                      )}
-                    </ActionIcon>
-                  </Group>
-
-                  <Collapse in={questsOpened}>
-                    <Grid style={{ marginTop: "10px" }}>
-                      <Grid.Col span={12}>
-                        <ul>
-                          {Object.entries(data.quests).map(
-                            ([quest, status]) => {
-                              const { text, color } = mapQuestProgress(status);
-                              const ABQuest = Object.entries(
-                                allOSRSQuests
-                              ).find(([_, value]) => value.fullName === quest);
-                              const ABquestObj = ABQuest?.[1];
-                              const inList = selectedBuilders.includes(
-                                ABquestObj?.builderName ?? ""
-                              );
-                              const isImplemented = !!ABQuest;
-                              const isCompletedOrImplemented =
-                                !!ABQuest || text === "Completed";
-                              return (
-                                <ul key={quest}>
-                                  <Group>
-                                    <ActionIcon
-                                      disabled={!isImplemented || inList}
-                                      variant="filled"
-                                      size="sm"
-                                      aria-label="Settings"
-                                      onClick={() =>
-                                        addQuestToList(ABquestObj?.builderName)
-                                      }
-                                    >
-                                      <IconPlus
-                                        style={{ width: "70%", height: "70%" }}
-                                        stroke={1.5}
-                                      />
-                                    </ActionIcon>
-                                    <Text
-                                      c={
-                                        isCompletedOrImplemented
-                                          ? color
-                                          : "orange"
-                                      }
-                                    >
-                                      {quest}:{" "}
-                                      {isCompletedOrImplemented
-                                        ? text
-                                        : "Not Implemented Yet"}
-                                    </Text>
-                                  </Group>
-                                </ul>
-                              );
-                            }
-                          )}
-                        </ul>
-                      </Grid.Col>
-                    </Grid>
-                  </Collapse>
-                </Card>
-              </Grid.Col>
-
-              {/* Card for Achievement Diaries */}
-              <Grid.Col span={12}>
-                <Card shadow="sm" padding="lg" radius="md" withBorder>
-                  <Group style={{ marginTop: "20px" }}>
-                    <Title order={4}>Achievement Diaries</Title>
-                    <ActionIcon
-                      onClick={() => setDiariesOpened((prev) => !prev)}
-                    >
-                      {diariesOpened ? (
-                        <IconChevronUp size={16} />
-                      ) : (
-                        <IconChevronDown size={16} />
-                      )}
-                    </ActionIcon>
-                  </Group>
-
-                  <Collapse in={diariesOpened}>
-                    <Grid style={{ marginTop: "10px" }}>
-                      <Grid.Col span={12}>
-                        {Object.entries(data.achievement_diaries).map(
-                          ([region, difficulties]) => (
-                            <div key={region}>
-                              <Title order={5}>{region}</Title>
-                              {Object.entries(difficulties).map(
-                                ([difficulty, { complete, tasks }]) => {
-                                  const completedTasks = tasks.filter(
-                                    (task) => task === true
-                                  ).length;
-                                  const progressPercent =
-                                    (completedTasks / tasks.length) * 100;
-                                  return (
-                                    <Card
-                                      key={difficulty}
-                                      shadow="sm"
-                                      padding="lg"
-                                      radius="md"
-                                      withBorder
-                                      style={{ marginBottom: "10px" }}
-                                    >
-                                      <Title order={6}>
-                                        {difficulty} Diaries
-                                      </Title>
-                                      <Text>
-                                        {complete
-                                          ? "Completed"
-                                          : "Not Completed"}
-                                      </Text>
-                                      <Text>
-                                        Tasks: {completedTasks}/{tasks.length} (
-                                        {progressPercent.toFixed(2)}%)
-                                      </Text>
-                                    </Card>
-                                  );
-                                }
-                              )}
-                            </div>
-                          )
-                        )}
-                      </Grid.Col>
-                    </Grid>
-                  </Collapse>
                 </Card>
               </Grid.Col>
             </Grid>

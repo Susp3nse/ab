@@ -81,7 +81,7 @@ const TaskListBuilder = ({
         <Title order={4}>Custom Task List:</Title>
         <Text
           size="sm"
-          color="dimmed"
+          c="dimmed"
           style={{
             wordWrap: "break-word",
             whiteSpace: "pre-wrap", // Ensure wrapping of text
@@ -89,7 +89,7 @@ const TaskListBuilder = ({
             overflowWrap: "break-word",
           }}
         >
-          {aggregatedString || "No builders selected"}
+          {aggregatedString || "No Tasks selected"}
         </Text>
 
         {/* Copy to clipboard button */}
