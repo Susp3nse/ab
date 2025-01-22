@@ -85,7 +85,7 @@ export enum OSRSQuestNames {
   MakingHistory = "makinghistory",
   MerlinsCrystal = "merlincrystal",
   MonkeyMadness = "monkeymadness",
-  MonkeyMadnessII = "monkeymadnessdareo",
+  MonkeyMadnessDareo = "monkeymadnessdareo",
   MonksFriend = "monksfriend",
   MountainDaughter = "mountaindaughter",
   MurderMystery = "murdermystery",
@@ -643,7 +643,7 @@ export const allOSRSQuests: OSRSQuests = {
     },
   },
   monkeymadnessdareo: {
-    fullName: "Monkey Madness II",
+    fullName: "Monkey Madness Dareo",
     builderName: "monkeymadnessdareo",
     requirements: {
       skills: {
