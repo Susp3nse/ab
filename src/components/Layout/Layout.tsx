@@ -9,6 +9,12 @@ import { routes } from "@/routes.js";
 export default function Layout() {
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
   const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
+
+  const closeSideBars = () => {
+    if (mobileOpened) {
+      toggleMobile();
+    }
+  };
   const isMobile = useMediaQuery(`(max-width: ${em(991)})`);
   useEffect(() => {
     if (!isMobile && mobileOpened) {
@@ -22,6 +28,7 @@ export default function Layout() {
           className={({ isActive }) => (isActive ? classes.link : classes.link)}
           to={item.path}
           key={item.label}
+          onClick={closeSideBars}
         >
           <item.icon />
           <span style={{ fontSize: 20, paddingLeft: 8 }}>{item.label}</span>

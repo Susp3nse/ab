@@ -2,8 +2,7 @@ import { createHashRouter, RouterProvider } from "react-router-dom";
 import Layout from "./components/Layout/Layout.js";
 import { Navigate } from "react-router-dom";
 import { lazy } from "react";
-import PremadeLists from "./pages/Premade.page.js";
-const QuestBuilder = lazy(() => import("./components/Builder.js"));
+const PremadeLists = lazy(() => import("./pages/Premade.page.js"));
 const HomePage = lazy(() => import("./pages/Home.page.js"));
 const AccountLookup = lazy(() => import("./pages/Lookup.page.js"));
 export const routes = [
