@@ -10,6 +10,10 @@ import {
   Group,
   Title,
   Text,
+  Input,
+  Button,
+  Box,
+  Stack,
 } from "@mantine/core";
 import { IconChevronUp, IconChevronDown, IconPlus } from "@tabler/icons-react";
 import { useState } from "react";
@@ -25,10 +29,16 @@ export default function NoAccountTaskBuilder() {
       <Grid mt={10} justify="center">
         <Grid.Col span={6}>
           <Center>
-            <SkillBuilderCard
-              selectedBuilders={selectedBuilders}
-              setSelectedBuilders={setSelectedBuilders}
-            ></SkillBuilderCard>
+            <Stack>
+              <SkillBuilderCard
+                selectedBuilders={selectedBuilders}
+                setSelectedBuilders={setSelectedBuilders}
+              ></SkillBuilderCard>
+              <ImportList
+                selectedBuilders={selectedBuilders}
+                setSelectedBuilders={setSelectedBuilders}
+              ></ImportList>
+            </Stack>
           </Center>
         </Grid.Col>
         <Grid.Col span={6}>
@@ -43,7 +53,47 @@ export default function NoAccountTaskBuilder() {
     </>
   );
 }
-
+const ImportList = ({
+  selectedBuilders,
+  setSelectedBuilders,
+}: {
+  selectedBuilders: string[];
+  setSelectedBuilders: (strs: string[]) => void;
+}) => {
+  const [inputValue, setInputValue] = useState<string>("");
+  const hanldeOnClick = () => {
+    const importList = inputValue.split(",");
+    setSelectedBuilders([...selectedBuilders, ...importList]);
+  };
+  return (
+    <>
+      <Card
+        style={{ marginTop: "20px", width: "100%", maxWidth: 500 }}
+        shadow="sm"
+        padding="lg"
+        radius="md"
+      >
+        <Center>
+          <Title pb={16} size="lg">
+            Import Task List
+          </Title>
+        </Center>
+        <Box>
+          <Center>
+            <Input
+              size="sm"
+              mr={10}
+              onChange={(value) => setInputValue(value.target.value)}
+            ></Input>
+            <Button size="sm" onClick={hanldeOnClick}>
+              Import
+            </Button>
+          </Center>
+        </Box>
+      </Card>
+    </>
+  );
+};
 const SkillBuilderCard = ({
   selectedBuilders,
   setSelectedBuilders,
