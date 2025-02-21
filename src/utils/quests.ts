@@ -1575,9 +1575,9 @@ export const allOSRSQuests: OSRSQuests = {
       itemsRequired: ["Dwarven food", "Dwarf's brew"],
     },
   },
-  rfdave: {
+  rfddave: {
     fullName: "Recipe for Disaster - Evil Dave",
-    builderName: "rfdave",
+    builderName: "rfddave",
     requirements: {
       skills: {
         cooking: 20,
