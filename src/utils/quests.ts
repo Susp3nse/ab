@@ -145,7 +145,7 @@ export enum OSRSQuestNames {
   EnlightenedJourney = "enlightenedjourney",
   Watchtower = "watchtower",
   RecipeForDisasterDwarf = "rfddwarf",
-  RecipeForDisasterDave = "rfdave",
+  RecipeForDisasterDave = "rfddave",
   RecipeForDisasterGuide = "rfdguide",
   RecipeForDisasterPete = "rfdpete",
   RecipeForDisasterSkrach = "rfdskrach",
